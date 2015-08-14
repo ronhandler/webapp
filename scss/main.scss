@@ -99,11 +99,24 @@ textarea {
 
 /* }}} */
 
+@import "compass";
+@import "compass/css3";
+
 $navbar-height: 50px;
 $logo-height: 40px;
 
+body {
+  background: image-url("/Images/body-background.jpg");
+  repeat: no-repeat;
+  @include background-size(cover);
+  background-position:center center;
+  background-attachment:fixed;
+}
+
+
 .page-body {
   padding-top: $navbar-height+15px;
+  background-color: grey;
 }
 
 nav.navigation-bar {
@@ -123,6 +136,7 @@ nav.navigation-bar {
 
   .search-bar {
     position: relative;
+    float: top;
     float:right;
     .search-box {
       position: absolute;

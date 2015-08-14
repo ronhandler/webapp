@@ -76,8 +76,19 @@ textarea {
    Author's custom styles
    ========================================================================== */
 /* }}} */
+body {
+  background: url(/Images/body-background.jpg);
+  repeat: no-repeat;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background-position: center center;
+  background-attachment: fixed; }
+
 .page-body {
-  padding-top: 65px; }
+  padding-top: 65px;
+  background-color: grey; }
 
 nav.navigation-bar {
   position: fixed;
@@ -92,6 +103,7 @@ nav.navigation-bar .navigation-items > * {
   display: inline-block; }
 nav.navigation-bar .search-bar {
   position: relative;
+  float: top;
   float: right; }
 nav.navigation-bar .search-bar .search-box {
   position: absolute;
