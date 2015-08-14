@@ -1,9 +1,11 @@
+/* {{{ */
 /*! HTML5 Boilerplate v5.2.0 | MIT License | https://html5boilerplate.com/ */
 /*
  * What follows is the result of much research on cross-browser styling.
  * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
  * Kroc Camen, and the H5BP dev community and team.
  */
+/* }}} */
 /* {{{ */
 /* ==========================================================================
    Base styles: opinionated defaults
@@ -75,7 +77,33 @@ textarea {
    ========================================================================== */
 /* }}} */
 .page-body {
-  padding-top: 100px; }
+  padding-top: 65px; }
+
+nav.navigation-bar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: black; }
+nav.navigation-bar .navigation-items {
+  padding: 5px 5px;
+  margin-top: 5px; }
+nav.navigation-bar .navigation-items > * {
+  display: inline-block; }
+nav.navigation-bar .search-bar {
+  position: relative;
+  float: right; }
+nav.navigation-bar .search-bar .search-box {
+  position: absolute;
+  right: 0;
+  float: right; }
+
+a.logo {
+  height: 40px; }
+
+form.search-box input {
+  height: 33.33333px;
+  border-radius: 5px; }
 
 /* {{{ */
 /* ==========================================================================
@@ -203,4 +231,4 @@ textarea {
   h2, h3 {
     page-break-after: avoid; } }
 /* }}} */
-/* vim: set fdm=marker fmr={,}: */
+/* vim: set expandtab ts=2 sw=2 fdm=marker fmr={,}: */

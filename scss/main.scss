@@ -1,3 +1,4 @@
+/* {{{ */
 /*! HTML5 Boilerplate v5.2.0 | MIT License | https://html5boilerplate.com/ */
 
 /*
@@ -5,7 +6,7 @@
  * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
  * Kroc Camen, and the H5BP dev community and team.
  */
-
+/* }}} */
 /* {{{ */
 /* ==========================================================================
    Base styles: opinionated defaults
@@ -98,12 +99,48 @@ textarea {
 
 /* }}} */
 
+$navbar-height: 50px;
+$logo-height: 40px;
+
 .page-body {
-  padding-top: 100px;
+  padding-top: $navbar-height+15px;
 }
 
+nav.navigation-bar {
+  position: fixed;
+  top: 0;
+  left:0;
+  right:0;
+  background-color: black;
 
+  .navigation-items {
+    padding: 5px 5px;
+    margin-top: 5px;
+    &>* {
+      display:inline-block;
+    }
+  }
 
+  .search-bar {
+    position: relative;
+    float:right;
+    .search-box {
+      position: absolute;
+      right: 0;
+      float:right;
+    }
+  }
+
+}
+
+a.logo {
+  height: $logo-height;
+}
+
+form.search-box input {
+  height: $navbar-height/1.5;
+  border-radius: 5px;
+}
 
 /* {{{ */
 
@@ -276,4 +313,4 @@ textarea {
 }
 
 /* }}} */
-/* vim: set fdm=marker fmr={,}: */
+/* vim: set expandtab ts=2 sw=2 fdm=marker fmr={,}: */
