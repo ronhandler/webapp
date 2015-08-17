@@ -118,12 +118,30 @@ nav.navigation-bar .search-bar .search-box {
   right: 0;
   float: right; }
 
+.search-box input {
+  transition: all 0.30s ease-in-out;
+  outline: none;
+  border: 3px solid transparent; }
+.search-box input:focus {
+  border: 3px solid #51cbee; }
+
 a.logo {
   height: 40px; }
 
 form.search-box input {
   height: 30px;
   border-radius: 5px; }
+
+.nav-section {
+  display: inline-block; }
+
+.menu-bar {
+  width: 100%; }
+
+.tabs {
+  width: 100%; }
+.tabs li {
+  display: inline-block; }
 
 /* {{{{{ */
 /* ==========================================================================
