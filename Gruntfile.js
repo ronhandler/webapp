@@ -20,7 +20,7 @@ module.exports = function (grunt) {
 			dist: {
 				options: {
 					config: "config.rb",
-					//imagesDir: '../img'
+					//imagesDir: '../Images'
 				},
 			}
 		},
