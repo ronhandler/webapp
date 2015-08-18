@@ -194,7 +194,7 @@ header {
 .tabs {
   width: auto;
   //text-align: center;
-  & li {
+  &>ul>li {
     display: inline-block;
     width: 22%;
     margin-left: auto;
@@ -209,7 +209,10 @@ header {
   }
 }
 
-
+.report>* {
+  display: inline-block;
+  width: auto;
+}
 /* [[[[[ */
 
 /* ==========================================================================

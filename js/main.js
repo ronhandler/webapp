@@ -13,6 +13,11 @@ $(document).ready( function() {
 		el.show();
 	};
 
+	/*
+	 *$(window).on('hashchange', function(e) {
+	 *});
+	 */
+
 	$(".tabs>div").hide();
 	if (location.hash) {
 		$(location.hash).show();
