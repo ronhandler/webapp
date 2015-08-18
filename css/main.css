@@ -1,12 +1,12 @@
-/* {{{{{ */
+/* [[[[[ */
 /*! HTML5 Boilerplate v5.2.0 | MIT License | https://html5boilerplate.com/ */
 /*
  * What follows is the result of much research on cross-browser styling.
  * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
  * Kroc Camen, and the H5BP dev community and team.
  */
-/* }}}}} */
-/* {{{{{ */
+/* ]]]]] */
+/* [[[[[ */
 /* ==========================================================================
    Base styles: opinionated defaults
    ========================================================================== */
@@ -75,7 +75,7 @@ textarea {
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-/* }}}}} */
+/* ]]]]] */
 /*********************
 BREAKPOINTS
 *********************/
@@ -157,8 +157,13 @@ header .layout-wrap > * {
   width: 22%;
   margin-left: auto;
   margin-right: auto; }
+.tabs li a {
+  outline: none; }
+.tabs li a:focus {
+  color: black;
+  text-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25); }
 
-/* {{{{{ */
+/* [[[[[ */
 /* ==========================================================================
    Helper classes
    ========================================================================== */
@@ -283,5 +288,5 @@ header .layout-wrap > * {
 
   h2, h3 {
     page-break-after: avoid; } }
-/* }}}}} */
-/* vim: set expandtab ts=2 sw=2 fdm=marker fmr={,}: */
+/* ]]]]] */
+/* vim: set expandtab ts=2 sw=2 fdm=marker fmr=[,]: */
