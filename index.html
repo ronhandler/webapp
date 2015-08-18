@@ -3,133 +3,116 @@
 <head>
   <meta charset="UTF-8">
   <title>WebApp</title>
-  <!-- Latest compiled and minified CSS -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
-  <!-- Optional theme -->
-  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">-->
   <link rel="stylesheet" href="css/normalize.css">
   <link rel="stylesheet" href="css/main.css">
 </head>
 
 <body>
-  <header>
-    <nav class="layout-wrap navigation-bar">
-      <div class="navigation-items container container-fluid">
-        <a class="logo" href="#">
-          <img src="https://googledrive.com/host/0B6ZIsommzsgVMVA2MzdKUjN2S0U/logo-netcraft.svg" alt="netcraft"></img>
-        </a>
-        <div class="search-bar .clearfix">
-          <form class="search-box" method="get" action="http://www.google.com" role="search">
-            <div class="form-group">
-              <input type="search form-control" name="q" placeholder="Search">
-            </div>
-          <!--<button type="submit" class="btn btn-default">Submit</button>-->
-          </form>
-        </div>
-      </div>
-    </nav>
-  </header>
+	<header>
+	  <div class="layout-wrap">
+	    <a href="#" class="logo">
+        <p>netcraft</p>
+        <img src="https://googledrive.com/host/0B6ZIsommzsgVMVA2MzdKUjN2S0U/logo-netcraft.svg" alt="netcraft">
+      </a>
 
-  <div class="page-body layout-wrap container container-fluid">
+	    <form class="search-box" method="get" action="http://www.google.com">
+	        <input type="search" name="q" placeholder="search">
+	    </form>
+	  </div>
+	</header>
 
-    <!-- Will be inflated with notifications. -->
-    <div class="notifications">
-    </div>
+	<div class="page-body layout-wrap">
+	    <div class="notifications">
+	    </div>
 
-    <nav class="menu-bar container container-fluid">
-      <div class="row">
-      <div class="nav-section col-sm-4">
-        <p>Select Reporting Platform</p>
+	    <nav>
+	        <div class="nav-section">
+	            <p>Select Reporting Platform</p>
 
-        <div class="menu">
-          <div class="menu-hint">
-            <p>Choose QS report</p>
-            <div class="arrow"></div>
-          </div>
+	            <div class="menu">
+	                <div class="menu-hint">
+	                    <p>Choose QS report</p>
+	                    <div class="arrow"></div>
+	                </div>
 
-          <ul class="action-list">
-            <li><a href="#">link</a></li>
-            <li><a href="#">link</a></li>
-            <li><a href="#">link</a></li>
-            <li><a href="#">link</a></li>
-            <li><a href="#">link</a></li>
-          </ul>
-        </div>
-      </div>
+	                <ul class="action-list">
+	                    <li><a href="#">link</a></li>
+	                    <li><a href="#">link</a></li>
+	                    <li><a href="#">link</a></li>
+	                    <li><a href="#">link</a></li>
+	                    <li><a href="#">link</a></li>
+	                </ul>
+	            </div>
+	        </div>
 
-      <div class="nav-section col-sm-4">
-        <p>Select Dashboard</p>
+	        <div class="nav-section">
+	            <p>Select Dashboard</p>
 
-        <div class="menu">
-          <div class="menu-hint">
-            <p>Choose dashboard</p>
-            <div class="arrow"></div>
-          </div>
+	            <div class="menu">
+	                <div class="menu-hint">
+	                    <p>Choose dashboard</p>
+	                    <div class="arrow"></div>
+	                </div>
 
-          <ul class="action-list">
-            <li><a href="#">link</a></li>
-            <li><a href="#">link</a></li>
-            <li><a href="#">link</a></li>
-            <li><a href="#">link</a></li>
-            <li><a href="#">link</a></li>
-          </ul>
-        </div>
-      </div>
+	                <ul class="action-list">
+	                    <li><a href="#">link</a></li>
+	                    <li><a href="#">link</a></li>
+	                    <li><a href="#">link</a></li>
+	                    <li><a href="#">link</a></li>
+	                    <li><a href="#">link</a></li>
+	                </ul>
+	            </div>
+	        </div>
 
-      <div class="nav-section col-sm-4">
-        <p>Help &amp; Tutorials</p>
+	        <div class="nav-section">
+	            <p>Help &amp; Tutorials</p>
 
-        <div class="menu">
-          <div class="menu-hint">
-            <p>Choose guide</p>
-            <div class="arrow"></div>
-          </div>
+	            <div class="menu">
+	                <div class="menu-hint">
+	                    <p>Choose guide</p>
+	                    <div class="arrow"></div>
+	                </div>
 
-          <ul class="action-list">
-            <li><a href="#">link</a></li>
-            <li><a href="#">link</a></li>
-            <li><a href="#">link</a></li>
-            <li><a href="#">link</a></li>
-            <li><a href="#">link</a></li>
-          </ul>
-        </div>
-      </div>
-      </div>
-    </nav>
+	                <ul class="action-list">
+	                    <li><a href="#">link</a></li>
+	                    <li><a href="#">link</a></li>
+	                    <li><a href="#">link</a></li>
+	                    <li><a href="#">link</a></li>
+	                    <li><a href="#">link</a></li>
+	                </ul>
+	            </div>
+	        </div>
+	    </nav>
 
-    <div class="tabs container container-fluid">
-      <ul class="row">
-        <li class="col-sm-3">
-          <a href="#quick-reports">Quick Reports</a>
-        </li>
-        <li class="col-sm-3">
-          <a href="#fmy-folders">My Folders</a>
-        </li>
-        <li class="col-sm-3">
-          <a href="#my-team-folders">My Team Folders</a>
-        </li>
-        <li class="col-sm-3">
-          <a href="#public-folders">Public Folders</a>
-        </li>
-      </ul>
+	    <div class="tabs">
+	        <ul>
+	            <li><a href="#quick-reports">Quick Reports</a>
+	            </li>
+	            <li><a href="#fmy-folders">My Folders</a>
+	            </li>
+	            <li><a href="#my-team-folders">My Team Folders</a>
+	            </li>
+	            <li><a href="#public-folders">Public Folders</a>
+	            </li>
+	        </ul>
 
-      <div id="quick-reports">
-      </div>
+	        <div id="quick-reports">
+	        </div>
 
-      <div id="fmy-folders">
-      </div>
+	        <div id="fmy-folders">
+	        </div>
 
-      <div id="my-team-folders">
-      </div>
+	        <div id="my-team-folders">
+	        </div>
 
-      <div id="public-folders">
-      </div>
-    </div>
-  </div>
+	        <div id="public-folders">
+	        </div>
+	    </div>
+	</div>
 </body>
+
 <script src="//code.jquery.com/jquery.js"></script>
-<!-- Latest compiled and minified JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 </html>
 <!--
 vim: expandtab ts=2 sw=2
