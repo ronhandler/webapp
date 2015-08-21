@@ -316,3 +316,9 @@ table {
 
 td, th {
   padding: 0; }
+
+ul {
+  padding: 0;
+  -webkit-margin-before: 0;
+  -webkit-margin-after: 0;
+  list-style-type: none; }
