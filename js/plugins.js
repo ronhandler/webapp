@@ -25,44 +25,103 @@
 //
 
 /**
- * JS Library v0
+ * JS Library v3
  */
 
 var UTILS = (function () {
 
 	return {
+		qs: function (selector) {
+			return document.querySelector(selector);
+		},
+
+		qsa: function (selector) {
+			return document.querySelectorAll(selector);
+		},
+
+		/**
+		 * Cross browser even handler
+		 *
+		 * @param {Object}   elm     Element on which the event will be bound
+		 * @param {string}   type    Event type or types (e.g. 'click', 'click input')
+		 * @param {Function} handler Callback function to run when event is fired
+		 */
+		addEvent: function (elm, type, handler) {
+			var types = type.split(' '),
+				ieHandler;
+
+			// Recurse if multiple event types were given
+			if (types.length > 1) {
+				// On each iteration, remove the first value in the array
+				while (types.length) {
+					UTILS.addEvent(elm, types.shift(), handler);
+				}
+
+				return;
+			}
+
+			if (window.addEventListener) {
+				// Modern browsers
+				elm.addEventListener(type, handler, false);
+			} else if (window.attachEvent) {
+				// IE8 and below
+				// Required for normalizing the "event" object
+				ieHandler = function (e) {
+					e.target = e.target || e.srcElement;
+					e.currentTarget = e.currentTarget || elm;
+
+					e.stopPropagation = e.stopPropagation || function () {
+						e.cancelBubble = true;
+					};
+
+					e.preventDefault = e.preventDefault || function () {
+						e.returnValue = false;
+					};
+
+					return handler.call(elm, e);
+				};
+
+				// Save a reference to the handler as a unique key
+				elm[type + handler] = ieHandler;
+				elm.attachEvent('on' + type, ieHandler);
+			}
+		},
+
+		/**
+		 * Cross browser event removal
+		 *
+		 * @param {Object}   elm     Element on which the event should be unbound
+		 * @param {string}   type    Event type to unbind
+		 * @param {Function} handler Reference to the original callback function
+		 */
+		removeEvent: function (elm, type, handler) {
+			var handlerRef;
+
+			if (window.removeEventListener) {
+				// Modern browsers
+				elm.removeEventListener(type, handler, false);
+			} else if (window.detachEvent) {
+				// IE8 and below
+				handlerRef = elm[type + handler];
+
+				// Make sure the handler key exists
+				if (handlerRef) {
+					elm.detachEvent('on' + type, handlerRef);
+					// Remove the key from the object, prevent memory leaks
+					delete elm[type + handler];
+				}
+			}
+		},
+
 		/**
 		 * Check if a given value is a plain Object
 		 *
 		 * @param  {*}       o Any value to be checked
 		 * @return {Boolean}   true if it's an Object
 		 */
-		isObject: function(o) {
+		isObject: function (o) {
 			var toString = Object.prototype.toString;
 			return (toString.call(o) === toString.call({}));
-		},
-		/**
-		 * Test function. Alerts the user with "Hi" message.
-		 */
-		sayHi: function() {
-			window.alert('Hi');
-		},
-		/**
-		 * Cross-browser add/remove event listeners.
-		 */
-		addEvent: function(elem, type, handler) {
-			if (elem.addEventListener) {
-				elem.addEventListener(type, handler, false);
-			} else if (elem.attachEvent)  {
-				elem.attachEvent('on'+type, handler);
-			}
-		},
-		removeEvent: function(elem, type, handler) {
-			if (elem.removeEventListener) {
-				elem.removeEventListener(type, handler, false);
-			} else if (elem.detachEvent)  {
-				elem.detachEvent('on'+type, handler);
-			}
 		},
 
 		/**
@@ -98,7 +157,6 @@ var UTILS = (function () {
 
 						// If server sent a content type header, handle formats
 						if (contentType) {
-							//alert('blah');
 							// Handle JSON format
 							if (contentType === 'text/json' ||
 								contentType === 'application/json') {
@@ -138,7 +196,7 @@ var UTILS = (function () {
 
 			// Fire the request
 			xhr.send(null);
-		},
+		}
 	};
 }());
 

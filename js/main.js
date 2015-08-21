@@ -1,42 +1,42 @@
-$(document).ready( function() {
+UTILS.addEvent(document, 'DOMContentLoaded', function() {
+	//$(window).scrollTop(0);
 
-	$(window).scrollTop(0);
+	// Initially hide the notification pane and tabs' content.
+	$("div.notifications").hide();
+	$(".tabs>div").hide();
+
+	if (location.hash) {
+		$(location.hash).show();
+	}
 
 	var refreshtab = function(e) {
 		e.preventDefault();
 		var cur = $(this).attr("href");
 		var el = $(cur);
-		el.removeAttr('id');
+		el.removeAttr('id');         // Temporarily remove id, so scroll won't jump.
 		location.hash = cur;
-		el.attr('id', cur.slice(1));
+		el.attr('id', cur.slice(1)); // Re-enable id.
 		$(".tabs>div").hide();
 		el.show();
 	};
 
-	/*
-	 *$(window).on('hashchange', function(e) {
-	 *});
-	 */
-
-	$(".tabs>div").hide();
-	if (location.hash) {
-		$(location.hash).show();
+	var elements = $(".tabs li>a");
+	for (var i=0; i<elements.length; i++) {
+		UTILS.addEvent(elements[i], 'focus click', refreshtab);
 	}
 
-	$(".tabs li>a").focus(refreshtab);
-	$(".tabs li>a").click(refreshtab);
-
+	// Get data using ajax UTILS method.
 	UTILS.ajax('/data/config.json',
 	{
 		method: 'GET',
 		done: {
 			call: function (data, res) {
-				$("div.notifications").append(res.notification);
+				if (res.notification) {
+					$("div.notifications").append(res.notification);
+					$("div.notifications").show();
+				} else {
+				}
 			}
 		}
-    });
+	});
 });
-
-$(document).load( function() {
-});
-
