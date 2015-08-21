@@ -170,15 +170,15 @@ header {
   float: right;
   input {
     position: absolute;
-    height: $navbar-height/1.7;
-    border-radius: 5px;
+    height: $navbar-height/1.55;
+    border-radius: 3px;
     top: 0;
     right: 0;
     transition: all 0.30s ease-in-out;
     outline: none;
-    border: 3px solid rgba(0,0,0,0);
+    border: 2px solid rgba(0,0,0,0);
     &:focus {
-      border: 3px solid rgba(81, 203, 238, 1);
+      border: 2px solid rgba(81, 203, 238, 1);
     }
   }
 }
@@ -211,8 +211,17 @@ header {
 
 .report>* {
   display: inline-block;
-  width: auto;
+  width: 30%;
+  max-width: 20rem;
+  &>label {
+    width: 20%;
+  }
+  &>input {
+    width: 70%;
+  }
 }
+
+
 /* [[[[[ */
 
 /* ==========================================================================

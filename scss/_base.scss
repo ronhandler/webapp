@@ -1,0 +1,15 @@
+
+/*********************
+BREAKPOINTS
+*********************/
+
+$break: 800px;
+
+@mixin breakpoint($media) {
+	@if $media == mobile {
+		@media only screen and (max-width: $break) { @content; }
+	}
+	@else if $media == desktop {
+		@media only screen and (min-width: $break) { @content; }
+	}
+}

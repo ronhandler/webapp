@@ -134,15 +134,15 @@ header .layout-wrap > * {
   float: right; }
 .search-box input {
   position: absolute;
-  height: 26.47059px;
-  border-radius: 5px;
+  height: 29.03226px;
+  border-radius: 3px;
   top: 0;
   right: 0;
   transition: all 0.30s ease-in-out;
   outline: none;
-  border: 3px solid transparent; }
+  border: 2px solid transparent; }
 .search-box input:focus {
-  border: 3px solid #51cbee; }
+  border: 2px solid #51cbee; }
 
 .nav-section {
   display: inline-block;
@@ -165,7 +165,12 @@ header .layout-wrap > * {
 
 .report > * {
   display: inline-block;
-  width: auto; }
+  width: 30%;
+  max-width: 20rem; }
+.report > * > label {
+  width: 20%; }
+.report > * > input {
+  width: 70%; }
 
 /* [[[[[ */
 /* ==========================================================================

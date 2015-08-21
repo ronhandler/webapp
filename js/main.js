@@ -25,5 +25,18 @@ $(document).ready( function() {
 
 	$(".tabs li>a").focus(refreshtab);
 	$(".tabs li>a").click(refreshtab);
+
+	UTILS.ajax('/data/config.json',
+	{
+		method: 'GET',
+		done: {
+			call: function (data, res) {
+				$("div.notifications").append(res.notification);
+			}
+		}
+    });
+});
+
+$(document).load( function() {
 });
 
