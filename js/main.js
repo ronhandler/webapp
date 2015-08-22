@@ -39,4 +39,18 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 			}
 		}
 	});
+
+	UTILS.addEvent($('#report-save')[0], 'click', function() {
+		var reports = [];
+		var elements = $(".report input");
+		for (var i=0; i<elements.length; i=i+2) {
+			var record = {
+				name: elements[i].value,
+				url: elements[i+1].value,
+			};
+			reports.push(record);
+		}
+		console.log(reports);
+	});
+
 });
