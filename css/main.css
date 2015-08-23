@@ -182,12 +182,16 @@ div.notifications {
   right: 0;
   position: absolute;
   layout: inline-block; }
-.tabs .iframe-header div.wheel {
+.tabs .iframe-header .selectbox {
+  margin-left: 1rem;
+  width: 10rem; }
+.tabs .iframe-header div.settings {
   background: url('../Images/icons/settings.png?1419163314');
   width: 24px;
   height: 24px;
-  float: right; }
-.tabs .iframe-header div.arrow {
+  float: right;
+  margin-right: 1rem; }
+.tabs .iframe-header div.newtab {
   background: url('../Images/icons/expand.png?1419163312');
   width: 16px;
   height: 16px;

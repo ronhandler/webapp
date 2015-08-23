@@ -50,11 +50,31 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 			};
 			reports.push(record);
 		}
-		$("#report-frame").attr('src', reports[0].url);
+		//$("#report-frame").attr('src', reports[0].url);
 		$(".tabs form").fadeToggle("fast");
+
+		// Populate the select box with the new user input.
+		$(".tabs .selectbox").empty();
+		for (var i=0; i<reports.length; i++) {
+			if (reports[i].name == "")
+				continue;
+			$(".tabs .selectbox").append($("<option/>", {
+				value: reports[i].url,
+				text: reports[i].name
+			}));
+		}
+		UTILS.addEvent($('.tabs .selectbox')[0], 'change', function() {
+			$("#report-frame").attr('src', $(this).val());
+		});
+		$(".tabs .selectbox").val(0).change();
+
+		UTILS.addEvent($(".tabs .newtab.icon")[0], 'focus click', function() {
+			var tempurl =  $(".tabs .selectbox").find("option:selected").val();
+			window.open(tempurl);
+		});
 	});
 
-	var elements = $(".tabs .wheel.icon");
+	var elements = $(".tabs .settings.icon");
 	for (var i=0; i<elements.length; i++) {
 		UTILS.addEvent(elements[i], 'focus click', function() {
 			$(".tabs form").fadeToggle("fast");
