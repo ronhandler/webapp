@@ -172,7 +172,46 @@ div.notifications {
   -webkit-box-shadow: gray 2px 2px 5px;
   box-shadow: gray 2px 2px 5px;
   padding: 1rem;
-  width: auto; }
+  width: auto;
+  position: relative;
+  right: 0; }
+
+.tabs .iframe-header {
+  width: 100%;
+  left: 0;
+  right: 0;
+  position: absolute;
+  layout: inline-block; }
+.tabs .iframe-header div.wheel {
+  background: url('../Images/icons/settings.png?1419163314');
+  width: 24px;
+  height: 24px;
+  float: right; }
+.tabs .iframe-header div.arrow {
+  background: url('../Images/icons/expand.png?1419163312');
+  width: 16px;
+  height: 16px;
+  float: right;
+  margin: 4px 20px; }
+
+.tabs form {
+  width: auto;
+  top: 50px;
+  left: 0;
+  right: 0;
+  margin: 1rem;
+  padding: 1rem;
+  background: #f0f0f0;
+  position: absolute; }
+
+.tabs iframe {
+  width: 100%;
+  height: 500px;
+  border: 1px solid white;
+  margin-top: 50px;
+  -moz-box-shadow: gray 0px 0px 5px;
+  -webkit-box-shadow: gray 0px 0px 5px;
+  box-shadow: gray 0px 0px 5px; }
 
 .report {
   display: flex;

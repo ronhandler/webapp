@@ -11,7 +11,7 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 
 	var refreshtab = function(e) {
 		e.preventDefault();
-		var cur = $(this).attr("href");
+		var cur = $(this).attr('href');
 		var el = $(cur);
 		el.removeAttr('id');         // Temporarily remove id, so scroll won't jump.
 		location.hash = cur;
@@ -50,7 +50,15 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 			};
 			reports.push(record);
 		}
-		console.log(reports);
+		$("#report-frame").attr('src', reports[0].url);
+		$(".tabs form").fadeToggle("fast");
 	});
+
+	var elements = $(".tabs .wheel.icon");
+	for (var i=0; i<elements.length; i++) {
+		UTILS.addEvent(elements[i], 'focus click', function() {
+			$(".tabs form").fadeToggle("fast");
+		});
+	}
 
 });
