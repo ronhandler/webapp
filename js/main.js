@@ -41,6 +41,7 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 	});
 
 	UTILS.addEvent($('#report-save')[0], 'click', function() {
+		// Get input from user.
 		var reports = [];
 		var elements = $(".report input");
 		for (var i=0; i<elements.length; i=i+2) {
@@ -50,7 +51,8 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 			};
 			reports.push(record);
 		}
-		//$("#report-frame").attr('src', reports[0].url);
+
+		// Fade effect on the toggle button.
 		$(".tabs form").fadeToggle("fast");
 
 		// Populate the select box with the new user input.
@@ -63,11 +65,14 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 				text: reports[i].name
 			}));
 		}
+
+		// Set event to for the select box to load site into iframe.
 		UTILS.addEvent($('.tabs .selectbox')[0], 'change', function() {
 			$("#report-frame").attr('src', $(this).val());
 		});
 		$(".tabs .selectbox").val(0).change();
 
+		// Set event to open a new tab with the selected site.
 		UTILS.addEvent($(".tabs .newtab.icon")[0], 'focus click', function() {
 			var tempurl =  $(".tabs .selectbox").find("option:selected").val();
 			window.open(tempurl);
