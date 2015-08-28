@@ -241,6 +241,11 @@ div.notifications {
   margin-right: 0.5rem; }
 .report > .report-form > input {
   flex: 1; }
+.report > .report-form .error {
+  border: 2px solid darkred;
+  -moz-box-shadow: red 0px 0px 5px;
+  -webkit-box-shadow: red 0px 0px 5px;
+  box-shadow: red 0px 0px 5px; }
 
 .button-box {
   float: right; }

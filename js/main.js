@@ -1,8 +1,31 @@
-function validate(reports) {
-	return 0;
-};
 UTILS.addEvent(document, 'DOMContentLoaded', function() {
 	//$(window).scrollTop(0);
+
+	var validate = function(reports) {
+		var flag = true;
+		//console.log(reports);
+		for (var i=0; i<reports.length; ++i) {
+			// If one of the fields in a row is missing, no good.
+			if (reports[i].name.value == "" && reports[i].url.value != "") {
+				flag = false;
+				reports[i].name.valid=false;
+			}
+			else if (reports[i].name.value != "" && reports[i].url.value == "") {
+				flag = false;
+				reports[i].url.valid=false;
+			} else {
+				reports[i].name.valid=true;
+				reports[i].url.valid=true;
+			}
+			var urlRegex = /(http|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/
+			if (urlRegex.test(reports[i].url.value) == false && reports[i].url.value!="") {
+				console.log('Not a url');
+				reports[i].url.valid=false;
+				flag = false;
+			}
+		}
+		return flag;
+	};
 
 	// Initially hide the notification pane and tabs' content.
 	$("div.notifications").hide();
@@ -43,6 +66,21 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 		}
 	});
 
+	// Add placeholders to all input elements.
+	$(".tabs input").each(function() {
+		var type = $(this).attr("name").toLowerCase();
+		$(this).attr("placeholder", "Enter "+type+"...");
+	});
+
+	["#public-folders", "#my-folders"].forEach(function(page) {
+		// Set event to open a new tab with the selected site.
+		UTILS.addEvent($(page+" .newtab.icon")[0], "focus click", function() {
+			var tempurl =  $(page+" iframe").attr("src");
+			window.open(tempurl);
+		});
+	});
+
+
 	var iframe_pages = ["#quick-reports", "#my-team-folders"];
 	iframe_pages.forEach(function(page) {
 		$(page+" input").each(function() {
@@ -64,13 +102,45 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 			var elements = $(page+" .report input");
 			for (var i=0; i<elements.length; i=i+2) {
 				var record = {
-					name: elements[i].value,
-					url: elements[i+1].value,
+					name: {value: elements[i].value},
+					url: {value: elements[i+1].value},
+					index: i,
 				};
+				if (record.name.value!="" && record.url.value!="")
 				reports.push(record);
 			}
 
-			var ret = validate(reports);
+			if (validate(reports) == false) {
+				// Clear error class from all elements.
+				elements.each(function() {
+					$(this).removeClass("error");
+				});
+				// Add error class to erroneous elements.
+				var eflag = false;
+				console.log(reports);
+				for (var i=0; i<reports.length; i++) {
+					if (reports[i].name.valid == false) {
+						if (eflag == false) {
+							// Set correct focus.
+							elements[reports[i].index].focus();
+							eflag = true;
+						}
+						elements[reports[i].index].classList.add("error");
+					}
+					if (reports[i].url.valid == false) {
+						if (eflag == false) {
+							// Set correct focus.
+							elements[reports[i].index+1].focus();
+							eflag = true;
+						}
+						elements[reports[i].index+1].classList.add("error");
+					}
+				}
+				return;
+			}
+			elements.each(function() {
+				$(this).removeClass("error");
+			});
 
 			// Fade effect on the toggle button.
 			$(page+" .settings.icon").trigger("click");
@@ -82,8 +152,8 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 				if (reports[i].name == "")
 					continue;
 				$(page+" .selectbox").append($("<option/>", {
-					value: reports[i].url,
-					text: reports[i].name
+					value: reports[i].url.value,
+					text: reports[i].name.value
 				}));
 			}
 

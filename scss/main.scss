@@ -301,6 +301,10 @@ $iframe-header-height: 50px;
   &>input {
     flex: 1;
   }
+  .error {
+    border: 2px solid darkred;
+    @include box-shadow(red 0px 0px 5px);
+  }
 }
 
 .button-box {
