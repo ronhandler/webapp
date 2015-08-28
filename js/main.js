@@ -19,9 +19,14 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 			}
 			var urlRegex = /(http|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/
 			if (urlRegex.test(reports[i].url.value) == false && reports[i].url.value!="") {
-				console.log('Not a url');
-				reports[i].url.valid=false;
-				flag = false;
+				var urlRegex2 = /[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/
+				if (urlRegex2.test(reports[i].url.value) == false && reports[i].url.value!="") {
+					console.log('Not a url');
+					reports[i].url.valid=false;
+					flag = false;
+				} else {
+					reports[i].url.value = "http://"+reports[i].url.value;
+				}
 			}
 		}
 		return flag;
