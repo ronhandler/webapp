@@ -242,8 +242,10 @@ div.notifications {
 .report > .report-form > input {
   flex: 1; }
 
+.button-box {
+  float: right; }
+
 .form-button {
-  float: right;
   color: #fafafa;
   padding: 0.25rem 2rem 0.25rem 2rem;
   background: #202020; }

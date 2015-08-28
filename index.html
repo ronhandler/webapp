@@ -99,7 +99,7 @@
 	        <div id="quick-reports">
             <div class="iframe-header">
               <select class="selectbox"></select>
-              <div class="settings icon"></div>
+              <div class="settings icon" name="#quick-reports"></div>
               <div class="newtab icon"></div>
             </div>
             <form class="clearfix">
@@ -132,7 +132,10 @@
                   </p>
                 </li>
               </ul>
-              <button id="report-save" name="#quick-reports" class="form-button" type="button">Save</button>
+              <div class="button-box">
+                <button id="report-save" name="#quick-reports" class="form-button" type="button">Save</button>
+                <button id="report-cancel" name="#quick-reports" class="form-button" type="button">Cancel</button>
+              </div>
             </form>
             <iframe id="report-frame" src="about:blank"></iframe>
 	        </div>
@@ -144,7 +147,7 @@
 	        <div id="my-team-folders">
             <div class="iframe-header">
               <select class="selectbox"></select>
-              <div class="settings icon"></div>
+              <div class="settings icon" name="#my-team-folders"></div>
               <div class="newtab icon"></div>
             </div>
             <form class="clearfix">
@@ -177,7 +180,10 @@
                   </p>
                 </li>
               </ul>
-              <button id="team-save" name="#my-team-folders" class="form-button" type="button">Save</button>
+              <div class="button-box">
+                <button id="team-save" name="#my-team-folders" class="form-button" type="button">Save</button>
+                <button id="team-cancel" name="#quick-reports" class="form-button" type="button">Cancel</button>
+              </div>
             </form>
             <iframe id="team-frame" src="about:blank"></iframe>
 	        </div>

@@ -1,3 +1,6 @@
+function validate(reports) {
+	return 0;
+};
 UTILS.addEvent(document, 'DOMContentLoaded', function() {
 	//$(window).scrollTop(0);
 
@@ -41,15 +44,24 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 	});
 
 	var iframe_pages = ["#quick-reports", "#my-team-folders"];
-	for (var p=0; p<iframe_pages.length; p++) {
-		var page = iframe_pages[p];
-		console.log('blah ' + page);
-		UTILS.addEvent($(page+" [id*='-save']")[0], 'click', function() {
-			var pg = $(this).attr('name');
-			console.log('baah ' + pg);
+	iframe_pages.forEach(function(page) {
+		$(page+" input").each(function() {
+			UTILS.addEvent($(this)[0], "keyup", function(e) {
+				if (e.keyCode === 13) {
+					$(page+" [id*='-save']").trigger("click");
+				} else if (e.keyCode === 27) {
+					$(page+" [id*='-cancel']").trigger("click");
+				}
+				e.preventDefault();
+			});
+		});
+		UTILS.addEvent($(page+" [id*='-cancel']")[0], "click", function() {
+			$(".tabs form").fadeToggle("fast");
+		});
+		UTILS.addEvent($(page+" [id*='-save']")[0], "click", function() {
 			// Get input from user.
 			var reports = [];
-			var elements = $(pg+" .report input");
+			var elements = $(page+" .report input");
 			for (var i=0; i<elements.length; i=i+2) {
 				var record = {
 					name: elements[i].value,
@@ -58,39 +70,47 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 				reports.push(record);
 			}
 
+			var ret = validate(reports);
+
 			// Fade effect on the toggle button.
-			$(pg+" form").fadeToggle("fast");
+			$(page+" .settings.icon").trigger("click");
+			//$(page+" form").fadeToggle("fast");
 
 			// Populate the select box with the new user input.
-			$(pg+" .selectbox").empty();
+			$(page+" .selectbox").empty();
 			for (var i=0; i<reports.length; i++) {
 				if (reports[i].name == "")
 					continue;
-				$(pg+" .selectbox").append($("<option/>", {
+				$(page+" .selectbox").append($("<option/>", {
 					value: reports[i].url,
 					text: reports[i].name
 				}));
 			}
 
 			// Set event to for the select box to load site into iframe.
-			UTILS.addEvent($(pg+" .selectbox")[0], "change", function() {
-				$(pg+" [id*='-frame'").attr('src', $(this).val());
+			UTILS.addEvent($(page+" .selectbox")[0], "change", function() {
+				$(page+" [id*='-frame'").attr('src', $(this).val());
 			});
-			$(pg+" .selectbox").val(0).change();
 
 			// Set event to open a new tab with the selected site.
-			UTILS.addEvent($(pg+" .newtab.icon")[0], "focus click", function() {
-				var tempurl =  $(pg+" .selectbox").find("option:selected").val();
+			UTILS.addEvent($(page+" .newtab.icon")[0], "focus click", function() {
+				var tempurl =  $(page+" .selectbox").find("option:selected").val();
 				window.open(tempurl);
 			});
-		});
-	}
 
-	var elements = $(".tabs .settings.icon");
-	for (var i=0; i<elements.length; i++) {
-		UTILS.addEvent(elements[i], 'focus click', function() {
-			$(".tabs form").fadeToggle("fast");
+			// Select the first option in the select box.
+			$(page+" .selectbox").attr('selectedIndex', 0);
+			$(page+" [id*='-frame'").attr('src', $(page+" .selectbox").val());
+
 		});
-	}
+		// Add event to the settings icon.
+		UTILS.addEvent($(page+" .settings.icon")[0], "focus click", function() {
+			$(page+" form").fadeToggle("fast");
+			$(page+" input")[0].focus();
+		});
+	});
+
+//http://walla.co.il
+//http://apple.com
 
 });
