@@ -97,42 +97,42 @@
 	        </ul>
 
 	        <div id="quick-reports">
-          <div class="iframe-header">
-            <select class="selectbox"></select>
-            <div class="settings icon"></div>
-            <div class="newtab icon"></div>
-          </div>
+            <div class="iframe-header">
+              <select class="selectbox"></select>
+              <div class="settings icon"></div>
+              <div class="newtab icon"></div>
+            </div>
             <form class="clearfix">
               <ul>
                 <li class="report">
                   <p class="report-name">Report 01</p>
                   <p class="report-form">
                     <label for="reportname01">Name</label>
-                    <input id "reportname01" type="text" name="Name"/>
+                    <input id="reportname01" type="text" name="Name"/>
                     <label for="reporturl01">URL</label>
-                    <input id "reporturl01" type="url" name="URL"/>
+                    <input id="reporturl01" type="url" name="URL"/>
                   </p>
                 </li>
                 <li class="report">
                   <p class="report-name">Report 02</p>
                   <p class="report-form">
                     <label for="reportname02">Name</label>
-                    <input id "reportname02" type="text" name="Name"/>
+                    <input id="reportname02" type="text" name="Name"/>
                     <label for="reporturl02">URL</label>
-                    <input id "reporturl02" type="url" name="URL"/>
+                    <input id="reporturl02" type="url" name="URL"/>
                   </p>
                 </li>
                 <li class="report">
                   <p class="report-name">Report 03</p>
                   <p class="report-form">
                     <label for="reportname03">Name</label>
-                    <input id "reportname03" type="text" name="Name"/>
+                    <input id="reportname03" type="text" name="Name"/>
                     <label for="reporturl03">URL</label>
-                    <input id "reporturl03" type="url" name="URL"/>
+                    <input id="reporturl03" type="url" name="URL"/>
                   </p>
                 </li>
               </ul>
-              <button id="report-save" class="form-button" type="button">Save</button>
+              <button id="report-save" name="#quick-reports" class="form-button" type="button">Save</button>
             </form>
             <iframe id="report-frame" src="about:blank"></iframe>
 	        </div>
@@ -142,7 +142,44 @@
 	        </div>
 
 	        <div id="my-team-folders">
-            my team folders...
+            <div class="iframe-header">
+              <select class="selectbox"></select>
+              <div class="settings icon"></div>
+              <div class="newtab icon"></div>
+            </div>
+            <form class="clearfix">
+              <ul>
+                <li class="report">
+                  <p class="report-name">Folder 01</p>
+                  <p class="report-form">
+                    <label for="teamname01">Name</label>
+                    <input id="teamname01" type="text" name="Name"/>
+                    <label for="teamurl01">URL</label>
+                    <input id="teamurl01" type="url" name="URL"/>
+                  </p>
+                </li>
+                <li class="report">
+                  <p class="report-name">Folder 02</p>
+                  <p class="report-form">
+                    <label for="teamname02">Name</label>
+                    <input id="teamname02" type="text" name="Name"/>
+                    <label for="teamurl02">URL</label>
+                    <input id="teamurl02" type="url" name="URL"/>
+                  </p>
+                </li>
+                <li class="report">
+                  <p class="report-name">Folder 03</p>
+                  <p class="report-form">
+                    <label for="teamname03">Name</label>
+                    <input id="teamname03" type="text" name="Name"/>
+                    <label for="teamurl03">URL</label>
+                    <input id="teamurl03" type="url" name="URL"/>
+                  </p>
+                </li>
+              </ul>
+              <button id="team-save" name="#my-team-folders" class="form-button" type="button">Save</button>
+            </form>
+            <iframe id="team-frame" src="about:blank"></iframe>
 	        </div>
 
 	        <div id="public-folders">

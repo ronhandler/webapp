@@ -80,7 +80,7 @@ textarea {
 BREAKPOINTS
 *********************/
 body {
-  background: url('../Images/body-background.jpg?1419163296');
+  background: url('../Images/body-background.jpg?1440577190');
   repeat: no-repeat;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -111,6 +111,7 @@ body {
     width: 75%; } }
 
 header {
+  z-index: 99;
   position: fixed;
   top: 0;
   left: 0;
@@ -186,13 +187,13 @@ div.notifications {
   margin-left: 1rem;
   width: 10rem; }
 .tabs .iframe-header div.settings {
-  background: url('../Images/icons/settings.png?1419163314');
+  background: url('../Images/icons/settings.png?1440577190');
   width: 24px;
   height: 24px;
   float: right;
   margin-right: 1rem; }
 .tabs .iframe-header div.newtab {
-  background: url('../Images/icons/expand.png?1419163312');
+  background: url('../Images/icons/expand.png?1440577190');
   width: 16px;
   height: 16px;
   float: right;

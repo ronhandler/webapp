@@ -40,44 +40,51 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 		}
 	});
 
-	UTILS.addEvent($('#report-save')[0], 'click', function() {
-		// Get input from user.
-		var reports = [];
-		var elements = $(".report input");
-		for (var i=0; i<elements.length; i=i+2) {
-			var record = {
-				name: elements[i].value,
-				url: elements[i+1].value,
-			};
-			reports.push(record);
-		}
+	var iframe_pages = ["#quick-reports", "#my-team-folders"];
+	for (var p=0; p<iframe_pages.length; p++) {
+		var page = iframe_pages[p];
+		console.log('blah ' + page);
+		UTILS.addEvent($(page+" [id*='-save']")[0], 'click', function() {
+			var pg = $(this).attr('name');
+			console.log('baah ' + pg);
+			// Get input from user.
+			var reports = [];
+			var elements = $(pg+" .report input");
+			for (var i=0; i<elements.length; i=i+2) {
+				var record = {
+					name: elements[i].value,
+					url: elements[i+1].value,
+				};
+				reports.push(record);
+			}
 
-		// Fade effect on the toggle button.
-		$(".tabs form").fadeToggle("fast");
+			// Fade effect on the toggle button.
+			$(pg+" form").fadeToggle("fast");
 
-		// Populate the select box with the new user input.
-		$(".tabs .selectbox").empty();
-		for (var i=0; i<reports.length; i++) {
-			if (reports[i].name == "")
-				continue;
-			$(".tabs .selectbox").append($("<option/>", {
-				value: reports[i].url,
-				text: reports[i].name
-			}));
-		}
+			// Populate the select box with the new user input.
+			$(pg+" .selectbox").empty();
+			for (var i=0; i<reports.length; i++) {
+				if (reports[i].name == "")
+					continue;
+				$(pg+" .selectbox").append($("<option/>", {
+					value: reports[i].url,
+					text: reports[i].name
+				}));
+			}
 
-		// Set event to for the select box to load site into iframe.
-		UTILS.addEvent($('.tabs .selectbox')[0], 'change', function() {
-			$("#report-frame").attr('src', $(this).val());
+			// Set event to for the select box to load site into iframe.
+			UTILS.addEvent($(pg+" .selectbox")[0], "change", function() {
+				$(pg+" [id*='-frame'").attr('src', $(this).val());
+			});
+			$(pg+" .selectbox").val(0).change();
+
+			// Set event to open a new tab with the selected site.
+			UTILS.addEvent($(pg+" .newtab.icon")[0], "focus click", function() {
+				var tempurl =  $(pg+" .selectbox").find("option:selected").val();
+				window.open(tempurl);
+			});
 		});
-		$(".tabs .selectbox").val(0).change();
-
-		// Set event to open a new tab with the selected site.
-		UTILS.addEvent($(".tabs .newtab.icon")[0], 'focus click', function() {
-			var tempurl =  $(".tabs .selectbox").find("option:selected").val();
-			window.open(tempurl);
-		});
-	});
+	}
 
 	var elements = $(".tabs .settings.icon");
 	for (var i=0; i<elements.length; i++) {
