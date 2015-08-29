@@ -112,6 +112,7 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 	}
 
 	var refreshtab = function(e) {
+		var x = window.scrollX, y = window.scrollY;
 		e.preventDefault();
 		var cur = $(this).attr('href');
 		var el = $(cur);
@@ -123,6 +124,7 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 		$(".tabs>ul>li").has($(this)).addClass("selected");
 		el.show();
 		reports["last-tab"] = cur;
+		window.scrollTo(x,y);
 		localStorage.setItem("data", JSON.stringify(reports));
 	};
 
@@ -130,7 +132,13 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 		UTILS.addEvent($(this)[0], "focus click", refreshtab);
 	});
 
-	//$(".tabs li>a [href='"+reports["last-tab"]+"']").click();
+	var changeTab = function(tab) {
+		console.log("Changing tab to: " + tab);
+		location.hash = tab;
+		$('a[href="'+tab+'"]').focus();
+	}
+
+	changeTab(reports["last-tab"]);
 
 	// Get data using ajax UTILS method.
 	UTILS.ajax('/data/config.json',
@@ -313,8 +321,9 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 	$(document).keyup(function(e) {
 		// w key pressed.
 		if (e.which == 87) {
-			console.log(reports);
-			console.log(JSON.parse(localStorage.getItem("data")));
+			//console.log(reports);
+			//console.log(JSON.parse(localStorage.getItem("data")));
+			console.log("Changing tab...");
 		}
 		if (e.which == 88) {
 			console.log("Clearing data");
