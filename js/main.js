@@ -39,7 +39,6 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 		"last-tab": "",
 	};
 	if (localStorage["data"] != undefined) {
-		console.log("Loading local storage into reports");
 		reports = JSON.parse(localStorage.getItem("data"));
 	}
 	/*
@@ -77,7 +76,7 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 
 	var validate = function(rep) {
 		var flag = true;
-		for (var i=0; i<rep.length; ++i) {
+		for (var i=0; i<3; ++i) {
 			// If one of the fields in a row is missing, no good.
 			if (rep[i].name.value == "" && rep[i].url.value != "") {
 				flag = false;
@@ -133,7 +132,6 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 	});
 
 	var changeTab = function(tab) {
-		console.log("Changing tab to: " + tab);
 		location.hash = tab;
 		$('a[href="'+tab+'"]').focus();
 	}
@@ -166,7 +164,7 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 			} else {
 				iframe_pages.forEach(function(p) {
 					if (reports[p]) {
-						for (var i=0; i<reports[p].length; i++) {
+						for (var i=0; i<3; i++) {
 							if (reports[p][i].name.value == pattern) {
 								// If this is the first match, open the page
 								// containing it.
@@ -246,7 +244,7 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 				});
 				// Add error class to erroneous elements.
 				var eflag = false;
-				for (var i=0; i<reports[page].length; i++) {
+				for (var i=0; i<3; i++) {
 					if (reports[page][i].name.valid == false) {
 						if (eflag == false) {
 							// Set correct focus.
@@ -303,9 +301,7 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 			$(page+" [id*='-frame'").attr('src', $(page+" .selectbox").val());
 
 			// Local storage.
-			console.log("Saving data...");
 			localStorage.setItem("data", JSON.stringify(reports));
-			console.log(JSON.parse(localStorage.getItem("data")));
 
 			populateInputs();
 
@@ -318,22 +314,21 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 		});
 	});
 
-	$(document).keyup(function(e) {
-		// w key pressed.
-		if (e.which == 87) {
-			//console.log(reports);
-			//console.log(JSON.parse(localStorage.getItem("data")));
-			console.log("Changing tab...");
-		}
-		if (e.which == 88) {
-			console.log("Clearing data");
-			reports = [];
-			localStorage.removeItem("data");
-		}
-	});
-
-//http://walla.co.il
-//http://apple.com
+	/*
+	 *$(document).keyup(function(e) {
+	 *    // w key pressed.
+	 *    if (e.which == 87) {
+	 *        //console.log(reports);
+	 *        //console.log(JSON.parse(localStorage.getItem("data")));
+	 *        console.log("Changing tab...");
+	 *    }
+	 *    if (e.which == 88) {
+	 *        console.log("Clearing data");
+	 *        reports = [];
+	 *        localStorage.removeItem("data");
+	 *    }
+	 *});
+	 */
 
 });
 
