@@ -1,31 +1,31 @@
 UTILS.addEvent(document, 'DOMContentLoaded', function() {
+
+	var iframe_pages = ["#quick-reports", "#my-team-folders"]
+	var reports = [];
 	//$(window).scrollTop(0);
 
-	var validate = function(reports) {
+	var validate = function(rep) {
 		var flag = true;
-		//console.log(reports);
-		for (var i=0; i<reports.length; ++i) {
+		for (var i=0; i<rep.length; ++i) {
 			// If one of the fields in a row is missing, no good.
-			if (reports[i].name.value == "" && reports[i].url.value != "") {
+			if (rep[i].name.value == "" && rep[i].url.value != "") {
 				flag = false;
-				reports[i].name.valid=false;
-			}
-			else if (reports[i].name.value != "" && reports[i].url.value == "") {
+				rep[i].name.valid=false;
+			} else if (rep[i].name.value != "" && rep[i].url.value == "") {
 				flag = false;
-				reports[i].url.valid=false;
+				rep[i].url.valid=false;
 			} else {
-				reports[i].name.valid=true;
-				reports[i].url.valid=true;
+				rep[i].name.valid=true;
+				rep[i].url.valid=true;
 			}
 			var urlRegex = /(http|https):\/\/[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/
-			if (urlRegex.test(reports[i].url.value) == false && reports[i].url.value!="") {
+			if (urlRegex.test(rep[i].url.value) == false && rep[i].url.value!="") {
 				var urlRegex2 = /[\w-]+(\.[\w-]+)+([\w.,@?^=%&amp;:\/~+#-]*[\w@?^=%&amp;\/~+#-])?/
-				if (urlRegex2.test(reports[i].url.value) == false && reports[i].url.value!="") {
-					console.log('Not a url');
-					reports[i].url.valid=false;
+				if (urlRegex2.test(rep[i].url.value) == false && rep[i].url.value!="") {
+					rep[i].url.valid=false;
 					flag = false;
 				} else {
-					reports[i].url.value = "http://"+reports[i].url.value;
+					rep[i].url.value = "http://"+rep[i].url.value;
 				}
 			}
 		}
@@ -71,6 +71,44 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 		}
 	});
 
+	UTILS.addEvent($(".search-box")[0], "keyup", function(e) {
+		if (e.keyCode === 13) {
+			var pattern = $(".search-box input").val();
+			var found = false;
+			console.log("searching... " + pattern);
+			iframe_pages.forEach(function(p) {
+				if (reports[p]) {
+					for (var i=0; i<reports[p].length; i++) {
+						if (reports[p][i].name.value == pattern) {
+							// If this is the first match, open the page
+							// containing it.
+							if (found == false) {
+								$(".tabs>div").hide();
+								$(".tabs [href='"+p+"']").focus();
+								$(p).show();
+
+								var el = $(p+" .selectbox option:contains('"+pattern+"')");
+								var ind = el.attr("name");
+								$(p+" .selectbox").prop('selectedIndex', ind);
+								found = true;
+							}
+						}
+					}
+				}
+			});
+			if (found==false) {
+				// Pattern wasn't found, we can display a notification.
+				$("div.notifications").html("The search report "+pattern+" was not found.");
+				$("div.notifications").show();
+			} else {
+				// Else, the pattern was found.
+				$("div.notifications").html("");
+				$("div.notifications").hide();
+			}
+		}
+		e.preventDefault();
+	});
+
 	// Add placeholders to all input elements.
 	$(".tabs input").each(function() {
 		var type = $(this).attr("name").toLowerCase();
@@ -85,9 +123,8 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 		});
 	});
 
-
-	var iframe_pages = ["#quick-reports", "#my-team-folders"];
 	iframe_pages.forEach(function(page) {
+		reports[page] = [];
 		$(page+" input").each(function() {
 			UTILS.addEvent($(this)[0], "keyup", function(e) {
 				if (e.keyCode === 13) {
@@ -103,42 +140,39 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 		});
 		UTILS.addEvent($(page+" [id*='-save']")[0], "click", function() {
 			// Get input from user.
-			var reports = [];
 			var elements = $(page+" .report input");
+			reports[page] = [];
 			for (var i=0; i<elements.length; i=i+2) {
 				var record = {
 					name: {value: elements[i].value},
 					url: {value: elements[i+1].value},
 					index: i,
 				};
-				if (record.name.value!="" && record.url.value!="")
-				reports.push(record);
+				reports[page].push(record);
 			}
-
-			if (validate(reports) == false) {
+			if (validate(reports[page]) == false) {
 				// Clear error class from all elements.
 				elements.each(function() {
 					$(this).removeClass("error");
 				});
 				// Add error class to erroneous elements.
 				var eflag = false;
-				console.log(reports);
-				for (var i=0; i<reports.length; i++) {
-					if (reports[i].name.valid == false) {
+				for (var i=0; i<reports[page].length; i++) {
+					if (reports[page][i].name.valid == false) {
 						if (eflag == false) {
 							// Set correct focus.
-							elements[reports[i].index].focus();
+							elements[reports[page][i].index].focus();
 							eflag = true;
 						}
-						elements[reports[i].index].classList.add("error");
+						elements[reports[page][i].index].classList.add("error");
 					}
-					if (reports[i].url.valid == false) {
+					if (reports[page][i].url.valid == false) {
 						if (eflag == false) {
 							// Set correct focus.
-							elements[reports[i].index+1].focus();
+							elements[reports[page][i].index+1].focus();
 							eflag = true;
 						}
-						elements[reports[i].index+1].classList.add("error");
+						elements[reports[page][i].index+1].classList.add("error");
 					}
 				}
 				return;
@@ -153,13 +187,15 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 
 			// Populate the select box with the new user input.
 			$(page+" .selectbox").empty();
-			for (var i=0; i<reports.length; i++) {
-				if (reports[i].name == "")
-					continue;
-				$(page+" .selectbox").append($("<option/>", {
-					value: reports[i].url.value,
-					text: reports[i].name.value
-				}));
+			var x=0;
+			for (var i=0; i<reports[page].length; i++) {
+				if (reports[page][i].name.value != "") {
+					$(page+" .selectbox").append($("<option/>", {
+						value: reports[page][i].url.value,
+						text: reports[page][i].name.value,
+						name: x++,
+					}));
+				}
 			}
 
 			// Set event to for the select box to load site into iframe.
@@ -174,7 +210,7 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 			});
 
 			// Select the first option in the select box.
-			$(page+" .selectbox").attr('selectedIndex', 0);
+			$(page+" .selectbox").prop('selectedIndex', 0);
 			$(page+" [id*='-frame'").attr('src', $(page+" .selectbox").val());
 
 		});
