@@ -1,8 +1,79 @@
 UTILS.addEvent(document, 'DOMContentLoaded', function() {
 
 	var iframe_pages = ["#quick-reports", "#my-team-folders"]
-	var reports = [];
-	//$(window).scrollTop(0);
+	var reports = {
+		"#quick-reports": {
+			0: { 
+				name: {value: "", valid: true},
+				url: {value: "", valid: true},
+				index: 0,
+			},
+			1: { 
+				name: {value: "", valid: true},
+				url: {value: "", valid: true},
+				index: 2,
+			},
+			2: { 
+				name: {value: "", valid: true},
+				url: {value: "", valid: true},
+				index: 4,
+			},
+		},
+		"#my-team-folders": {
+			0: { 
+				name: {value: "", valid: true},
+				url: {value: "", valid: true},
+				index: 0,
+			},
+			1: { 
+				name: {value: "", valid: true},
+				url: {value: "", valid: true},
+				index: 2,
+			},
+			2: { 
+				name: {value: "", valid: true},
+				url: {value: "", valid: true},
+				index: 4,
+			},
+		},
+		"last-tab": "",
+	};
+	if (localStorage["data"] != undefined) {
+		console.log("Loading local storage into reports");
+		reports = JSON.parse(localStorage.getItem("data"));
+	}
+	/*
+	 *reports = [];
+	 *localStorage.removeItem("data");
+	 */
+
+	// Populate fields using localStorage.
+	var populateInputs = function() {
+		iframe_pages.forEach(function(page) {
+			if (reports[page]) {
+				for (var i=0; i<3; ++i) {
+					$(page+" input")[reports[page][i].index].value =
+						reports[page][i].name.value;
+					$(page+" input")[reports[page][i].index+1].value =
+						reports[page][i].url.value;
+				}
+			}
+
+			$(page+" .selectbox").empty();
+			var x=0;
+			for (var i=0; i<3; i++) {
+				if (reports[page][i].name.value != "") {
+					$(page+" .selectbox").append($("<option/>", {
+						value: reports[page][i].url.value,
+						text: reports[page][i].name.value,
+						name: x++,
+					}));
+				}
+			}
+		});
+	};
+
+	populateInputs();
 
 	var validate = function(rep) {
 		var flag = true;
@@ -51,11 +122,15 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 		$(".tabs>ul>li").removeClass("selected");
 		$(".tabs>ul>li").has($(this)).addClass("selected");
 		el.show();
+		reports["last-tab"] = cur;
+		localStorage.setItem("data", JSON.stringify(reports));
 	};
 
 	$(".tabs li>a").each(function() {
 		UTILS.addEvent($(this)[0], "focus click", refreshtab);
 	});
+
+	//$(".tabs li>a [href='"+reports["last-tab"]+"']").click();
 
 	// Get data using ajax UTILS method.
 	UTILS.ajax('/data/config.json',
@@ -133,7 +208,7 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 	});
 
 	iframe_pages.forEach(function(page) {
-		reports[page] = [];
+		//reports[page] = [];
 		$(page+" input").each(function() {
 			UTILS.addEvent($(this)[0], "keyup", function(e) {
 				if (e.keyCode === 13) {
@@ -150,14 +225,11 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 		UTILS.addEvent($(page+" [id*='-save']")[0], "click", function() {
 			// Get input from user.
 			var elements = $(page+" .report input");
-			reports[page] = [];
-			for (var i=0; i<elements.length; i=i+2) {
-				var record = {
-					name: {value: elements[i].value},
-					url: {value: elements[i+1].value},
-					index: i,
-				};
-				reports[page].push(record);
+			for (var i=0, x=0; i<elements.length; i=i+2) {
+				reports[page][x].name = {value: elements[i].value};
+				reports[page][x].url = {value: elements[i+1].value};
+				reports[page][x].index = i;
+				x++;
 			}
 			if (validate(reports[page]) == false) {
 				// Clear error class from all elements.
@@ -197,7 +269,7 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 			// Populate the select box with the new user input.
 			$(page+" .selectbox").empty();
 			var x=0;
-			for (var i=0; i<reports[page].length; i++) {
+			for (var i=0; i<3; i++) {
 				if (reports[page][i].name.value != "") {
 					$(page+" .selectbox").append($("<option/>", {
 						value: reports[page][i].url.value,
@@ -222,7 +294,15 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 			$(page+" .selectbox").prop('selectedIndex', 0);
 			$(page+" [id*='-frame'").attr('src', $(page+" .selectbox").val());
 
-		});
+			// Local storage.
+			console.log("Saving data...");
+			localStorage.setItem("data", JSON.stringify(reports));
+			console.log(JSON.parse(localStorage.getItem("data")));
+
+			populateInputs();
+
+		}); // save input button.
+
 		// Add event to the settings icon.
 		UTILS.addEvent($(page+" .settings.icon")[0], "focus click", function() {
 			$(page+" form").fadeToggle("fast");
@@ -230,7 +310,21 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 		});
 	});
 
+	$(document).keyup(function(e) {
+		// w key pressed.
+		if (e.which == 87) {
+			console.log(reports);
+			console.log(JSON.parse(localStorage.getItem("data")));
+		}
+		if (e.which == 88) {
+			console.log("Clearing data");
+			reports = [];
+			localStorage.removeItem("data");
+		}
+	});
+
 //http://walla.co.il
 //http://apple.com
 
 });
+

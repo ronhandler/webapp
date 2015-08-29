@@ -177,9 +177,9 @@ div.notifications {
 
 .tabs > div {
   background: #f0f0f0;
-  -moz-box-shadow: gray 2px 2px 5px;
-  -webkit-box-shadow: gray 2px 2px 5px;
-  box-shadow: gray 2px 2px 5px;
+  -moz-box-shadow: gray 2px 5px 5px;
+  -webkit-box-shadow: gray 2px 5px 5px;
+  box-shadow: gray 2px 5px 5px;
   padding: 1rem;
   width: auto;
   position: relative;

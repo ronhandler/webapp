@@ -228,7 +228,7 @@ $iframe-header-height: 50px;
 
 .tabs > div {
   background: #f0f0f0;
-  @include box-shadow(gray 2px 2px 5px);
+  @include box-shadow(gray 2px 5px 5px);
   padding: 1rem;
   width: auto;
   position: relative;
