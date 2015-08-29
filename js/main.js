@@ -48,13 +48,14 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 		location.hash = cur;
 		el.attr('id', cur.slice(1)); // Re-enable id.
 		$(".tabs>div").hide();
+		$(".tabs>ul>li").removeClass("selected");
+		$(".tabs>ul>li").has($(this)).addClass("selected");
 		el.show();
 	};
 
-	var elements = $(".tabs li>a");
-	for (var i=0; i<elements.length; i++) {
-		UTILS.addEvent(elements[i], 'focus click', refreshtab);
-	}
+	$(".tabs li>a").each(function() {
+		UTILS.addEvent($(this)[0], "focus click", refreshtab);
+	});
 
 	// Get data using ajax UTILS method.
 	UTILS.ajax('/data/config.json',
@@ -75,27 +76,35 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 		if (e.keyCode === 13) {
 			var pattern = $(".search-box input").val();
 			var found = false;
-			console.log("searching... " + pattern);
-			iframe_pages.forEach(function(p) {
-				if (reports[p]) {
-					for (var i=0; i<reports[p].length; i++) {
-						if (reports[p][i].name.value == pattern) {
-							// If this is the first match, open the page
-							// containing it.
-							if (found == false) {
-								$(".tabs>div").hide();
-								$(".tabs [href='"+p+"']").focus();
-								$(p).show();
+			if (pattern.length == 0) {
+				// No need to display an error if searched for an empty
+				// pattern.
+				found = true;
+			} else {
+				iframe_pages.forEach(function(p) {
+					if (reports[p]) {
+						for (var i=0; i<reports[p].length; i++) {
+							if (reports[p][i].name.value == pattern) {
+								// If this is the first match, open the page
+								// containing it.
+								if (found == false) {
+									$(".tabs>div").hide();
+									$(".tabs [href='"+p+"']").focus();
+									$(p).show();
 
-								var el = $(p+" .selectbox option:contains('"+pattern+"')");
-								var ind = el.attr("name");
-								$(p+" .selectbox").prop('selectedIndex', ind);
-								found = true;
+									var el = $(p+" .selectbox option:contains('"+pattern+"')");
+									var ind = el.attr("name");
+									var value = $(p+" .selectbox option")[ind].value;
+									//$(p+" .selectbox").prop('selectedIndex', ind);
+									$(p+" .selectbox").val(value).change();
+									$(p+" [id*='-frame'").attr("src", value);
+									found = true;
+								}
 							}
 						}
 					}
-				}
-			});
+				});
+			}
 			if (found==false) {
 				// Pattern wasn't found, we can display a notification.
 				$("div.notifications").html("The search report "+pattern+" was not found.");

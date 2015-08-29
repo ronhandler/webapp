@@ -200,18 +200,26 @@ div.notifications {
 
 .tabs {
   width: auto;
-  //text-align: center;
   &>ul>li {
     display: inline-block;
     width: 22%;
     margin-left: auto;
-    margin-right: auto;
-    & a {
-      outline: none;
-      &:focus {
+    margin-right: 0.5rem;
+    padding-top: 0.8rem;
+    padding-bottom: 0.8rem;
+    text-align: center;
+    background: gray;
+    &.selected {
+      &>a {
         @include link-colors(black);
-        @include single-text-shadow(0px, 0px, 10px, $color: rgba(#000,0.25));
       }
+      background: #f0f0f0;
+      @include single-text-shadow(0px, 0px, 10px, $color: rgba(#000,0.25));
+    }
+    & a {
+      text-decoration: none;
+      @include link-colors(white);
+      outline: none;
     }
   }
 }
