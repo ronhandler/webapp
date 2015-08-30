@@ -165,6 +165,8 @@ div.notifications {
   margin-right: auto;
   padding: 0;
   background: black; }
+.navigation-bar .nav-section:hover .action-list {
+  display: inline-block !important; }
 .navigation-bar .nav-section > p {
   text-align: center;
   color: white;
@@ -177,11 +179,15 @@ div.notifications {
   text-overflow: ellipsis;
   white-space: nowrap; }
 .navigation-bar .nav-section > .menu .action-list {
+  z-index: 1000;
   display: none;
+  width: 23.5%;
+  position: absolute;
   background: #fafafa;
-  margin-left: 0.7rem;
-  margin-right: auto;
-  padding: 0; }
+  margin-top: -1rem;
+  margin-left: 0;
+  padding: 0;
+  padding: 1rem; }
 
 .tabs {
   width: auto; }
