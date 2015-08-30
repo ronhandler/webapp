@@ -148,11 +148,40 @@ div.notifications {
   border: 1px solid #f5aca6;
   background-color: #ffecec; }
 
-.nav-section {
+.nav-bar {
+  width: auto;
+  display: flex; }
+
+.navigation-bar {
+  display: flex; }
+.navigation-bar .nav-section:first-of-type {
+  margin-left: 0; }
+.navigation-bar .nav-section:last-of-type {
+  margin-right: 0; }
+.navigation-bar .nav-section {
   display: inline-block;
-  width: 30%;
-  margin-left: auto;
-  margin-right: auto; }
+  width: 32%;
+  margin-left: 0.7rem;
+  margin-right: auto;
+  padding: 0;
+  background: black; }
+.navigation-bar .nav-section > p {
+  text-align: center;
+  color: white;
+  height: 4rem; }
+.navigation-bar .nav-section > .menu {
+  background: #fafafa;
+  margin-bottom: -1rem; }
+.navigation-bar .nav-section > .menu .menu-hint {
+  padding-left: 1.5rem;
+  text-overflow: ellipsis;
+  white-space: nowrap; }
+.navigation-bar .nav-section > .menu .action-list {
+  display: none;
+  background: #fafafa;
+  margin-left: 0.7rem;
+  margin-right: auto;
+  padding: 0; }
 
 .tabs {
   width: auto; }
@@ -199,7 +228,7 @@ div.notifications {
   left: 0;
   right: 0;
   position: absolute;
-  layout: inline-block; }
+  display: inline-block; }
 .tabs .iframe-header .selectbox {
   margin-left: 1rem;
   width: 10rem; }

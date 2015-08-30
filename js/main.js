@@ -140,7 +140,7 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 	changeTab(reports["last-tab"]);
 
 	// Get data using ajax UTILS method.
-	UTILS.ajax('/data/config.json',
+	UTILS.ajax('data/config.json',
 	{
 		method: 'GET',
 		done: {

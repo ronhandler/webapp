@@ -190,12 +190,50 @@ div.notifications {
   background-color: #ffecec;
 }
 
-.nav-section {
-  display: inline-block;
-  //text-align: center;
-  width: 30%;
-  margin-left: auto;
-  margin-right: auto;
+.nav-bar {
+  width: auto;
+  display: flex;
+}
+
+.navigation-bar {
+  display: flex;
+  .nav-section:first-of-type {
+    margin-left: 0;
+  }
+  .nav-section:last-of-type {
+    margin-right: 0;
+  }
+  .nav-section {
+    display: inline-block;
+    width: 32%;
+    margin-left: 0.7rem;
+    margin-right: auto;
+    padding: 0;
+    background: black;
+  }
+  .nav-section>p {
+    text-align: center;
+    color: white;
+    height: 4rem;
+  }
+  .nav-section>.menu {
+    //padding: 1rem;
+    background: #fafafa;
+    margin-bottom: -1rem;
+    .menu-hint {
+      padding-left: 1.5rem;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .action-list {
+      display: none;
+      //position: relative;
+      background: #fafafa;
+      margin-left: 0.7rem;
+      margin-right: auto;
+      padding: 0;
+    }
+  }
 }
 
 .tabs {
@@ -251,7 +289,7 @@ $iframe-header-height: 50px;
   left: 0;
   right: 0;
   position: absolute;
-  layout: inline-block;
+  display: inline-block;
   .selectbox {
     margin-left: 1rem;
     width: 10rem;
