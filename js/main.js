@@ -69,6 +69,7 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 					}));
 				}
 			}
+			$(page+" [id*='-frame'").attr('src', $(page+" .selectbox").val());
 		});
 	};
 
@@ -188,7 +189,7 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 			}
 			if (found==false) {
 				// Pattern wasn't found, we can display a notification.
-				$("div.notifications").html("The search report "+pattern+" was not found.");
+				$("div.notifications").html("The search report \""+pattern+"\" was not found.");
 				$("div.notifications").show();
 			} else {
 				// Else, the pattern was found.

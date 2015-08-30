@@ -156,11 +156,20 @@ div.notifications {
 
 .tabs {
   width: auto; }
+.tabs > ul {
+  display: flex; }
+.tabs > ul > li:first-of-type {
+  margin-left: 0; }
+.tabs > ul > li:last-of-type {
+  margin-right: 0; }
 .tabs > ul > li {
+  -moz-box-shadow: gray 2px 5px 5px;
+  -webkit-box-shadow: gray 2px 5px 5px;
+  box-shadow: gray 2px 5px 5px;
   display: inline-block;
   width: 22%;
-  margin-left: auto;
-  margin-right: 0.5rem;
+  margin-left: 1rem;
+  margin-right: auto;
   padding-top: 0.8rem;
   padding-bottom: 0.8rem;
   text-align: center;
