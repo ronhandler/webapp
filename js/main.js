@@ -166,7 +166,7 @@ UTILS.addEvent(document, 'DOMContentLoaded', function() {
 				iframe_pages.forEach(function(p) {
 					if (reports[p]) {
 						for (var i=0; i<3; i++) {
-							if (reports[p][i].name.value == pattern) {
+							if (reports[p][i].name.value.toLowerCase().indexOf(pattern.toLowerCase()) > -1) {
 								// If this is the first match, open the page
 								// containing it.
 								if (found == false) {
